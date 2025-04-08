@@ -6,7 +6,11 @@ from .serializers import UserSerializer, TeamSerializer, ActivitySerializer, Lea
 
 @api_view(['GET'])
 def api_root(request, format=None):
-    base_url = 'https://redesigned-cod-j9gggj77j6x3p5px-8000.app.github.dev/'
+    base_url = request.build_absolute_uri('/')
+    if 'localhost' in base_url:
+        base_url = 'http://localhost:8000/'
+    else:
+        base_url = 'https://redesigned-cod-j9gggj77j6x3p5px-8000.app.github.dev/'
     return Response({
         'users': base_url + 'api/users/?format=api',
         'teams': base_url + 'api/teams/?format=api',
