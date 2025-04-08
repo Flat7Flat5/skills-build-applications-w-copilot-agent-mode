@@ -11,7 +11,7 @@ class User(models.Model):
 
 class Team(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    members = models.ArrayField(model_container=User)
+    members = models.ManyToManyField(User, related_name='teams')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
